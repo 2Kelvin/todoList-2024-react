@@ -1,0 +1,11 @@
+.todoapp {
+    height: 45rem;
+    width: 35rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: var(--lightfg);
+}
+
+.todoapp .addTodosSection {
+    display: flex;
+}
