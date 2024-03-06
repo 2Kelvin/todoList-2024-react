@@ -3,17 +3,17 @@ import { useState } from 'react';
 
 
 export default function TodoApp() {
-    const [todosList, setTodosList] = useState([]);
-    const [newTodoItem, setNewTodoItem] = useState('');
+    const [todoList, setTodoList] = useState([]);
+    const [newTodo, setNewTodo] = useState('');
 
     function handleAddTodo() {
         // get the input value
         // make a copy of the todolist array
         // add the input value to the copy array
         // set todolist state using the new copy array
-        setTodosList([...todosList, newTodoItem]);
+        setTodoList([...todoList, newTodo]);
         // clearing the input field once state is updated
-        setNewTodoItem('');
+        setNewTodo('');
     }
 
     return (
@@ -23,8 +23,8 @@ export default function TodoApp() {
                     <input
                         type='input'
                         required
-                        value={newTodoItem}
-                        onChange={(e) => setNewTodoItem(e.target.value)}
+                        value={newTodo}
+                        onChange={(e) => setNewTodo(e.target.value)}
                     />
                 </label>
 
@@ -37,13 +37,13 @@ export default function TodoApp() {
                 {
                     // iterating through each todo item in the todosList array
                     // displaying each todo in a list item
-                    todosList.map((todo, i) => (
+                    todoList.map((todo, i) => (
                         <li key={i}>
                             <label>
                                 <input type='checkbox' />
                                 {todo}
                                 <button onClick={() => {
-                                    setTodosList(todosList.filter((eachTodo) => todosList[i] !== eachTodo));
+                                    setTodoList(todoList.filter((eachTodo) => todoList[i] !== eachTodo));
                                 }}>
                                     Delete
                                 </button>
