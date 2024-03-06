@@ -1,5 +1,5 @@
 .todoapp {
-    height: 45rem;
+    height: 30rem;
     width: 35rem;
     border: 1px solid #555;
     border-radius: 5px;
@@ -8,4 +8,9 @@
 
 .todoapp .addTodosSection {
     display: flex;
+}
+
+.todo-checked {
+    color: grey;
+    text-decoration: line-through;
 }
