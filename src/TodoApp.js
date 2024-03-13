@@ -1,8 +1,8 @@
 import './TodoApp.css';
 import { useState } from 'react';
+import { v4 } from 'uuid'
+import OneTodo from './OneTodo';
 
-
-let nextTodoIndex = 0;
 
 export default function TodoApp() {
     const [todoList, setTodoList] = useState([]);
@@ -13,12 +13,15 @@ export default function TodoApp() {
         // make a copy of the todolist array
         // add the input value to the copy array
         // set todolist state using the new copy array
-        setTodoList(
-            [
-                ...todoList,
-                { id: nextTodoIndex++, name: newTodo, completed: false }
-            ]
-        );
+        if (newTodo) {
+            // only adding the newTodo if it's not empty
+            setTodoList(
+                [
+                    ...todoList,
+                    { id: v4(), name: newTodo, completed: false } // random id created using uuid.v4()
+                ]
+            );
+        }
         // clearing the input field once state is updated
         setNewTodo('');
     }
@@ -43,26 +46,14 @@ export default function TodoApp() {
             <ul className='displayTodosSection'>
                 {
                     // iterating through each todo item in the todosList array
-                    // displaying each todo in a list item
+                    // displaying each todo in a list item; in a reusable component 'OneTodo'
                     todoList.map((todo) => (
-                        <li key={todo.id}>
-                            <label>
-                                <input
-                                    type='checkbox'
-                                />
-                                {todo.name}
-                                <button>Edit</button>
-                                <button onClick={() => {
-                                    // deleting the current selected todo item when the delete button is clicked
-                                    // filter returns a new array of todos which pass the condition
-                                    // so all todos that are not this (todoList[i]) todo will be returned
-                                    // the 'i' is accessed from map method above
-                                    setTodoList(todoList.filter((eachTodo) => todo.id !== eachTodo.id));
-                                }}>
-                                    Delete
-                                </button>
-                            </label>
-                        </li>
+                        <OneTodo
+                            key={todo.id}
+                            todo={todo}
+                            todoList={todoList}
+                            setTodoList={setTodoList}
+                        />
                     ))
                 }
             </ul>
